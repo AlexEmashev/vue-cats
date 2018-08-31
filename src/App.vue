@@ -5,13 +5,15 @@
       <router-link to="/favorites">Favorites</router-link> |
       <router-link to="/about">About</router-link>
     </div>
+    <article class="content">
     <router-view/>
+    </article>
   </div>
 </template>
 
-<style lang="scss">
+<style scoped lang="scss">
 #app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
+  font-family: "Avenir", Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
@@ -26,5 +28,10 @@
       color: #42b983;
     }
   }
+}
+.content {
+  display: block;
+  margin: 0 auto;
+  max-width: 640px;
 }
 </style>
