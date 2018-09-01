@@ -43,21 +43,25 @@ export default new Vuex.Store({
      * @param {*} categories
      */
     setCategories(state, categories) {
-
+      state.categories = categories
     },
     /**
      * Toggles category
      * @param {*} state
      * @param {*} category category to toggle.
      */
-    toggleCategory(state, category) {
-
+    toggleCategory(state, id) {
+      state.categories.map(category => {
+        if (category.id === id) {
+          category.selected = !category.selected
+        }
+        return category
+      })
     },
     imageLoading(state) {
       state.inProgress = true
     },
     imageLoaded(state, imageURL) {
-      console.log('Image loaded:', imageURL)
       state.imageURL = imageURL
       state.inProgress = false
     }
@@ -71,19 +75,28 @@ export default new Vuex.Store({
     getImage(context, categoryIds) {
       context.commit('imageLoading')
 
-      HttpService.getRandomImage()
+      HttpService.getImage()
       .then((response) => {
         context.commit('imageLoaded', response.data[0].url)
       })
       .catch((error) => {
+        console.error('👎 Error while loading image: ', error)
         context.commit('imageLoaded', '')
       })
     },
     /**
      * Returns categories list from remote
      */
-    getCategories() {
-
+    getCategories(context) {
+      HttpService.getCategories()
+      .then((response) => {
+        const categories = response.data.map(
+          category =>  Object.assign(category, {'selected': true}))
+        context.commit('setCategories', categories)
+      })
+      .catch((error) => {
+        console.error('👎 Error while loading categories: ', error)
+      })
     }
   }
 })

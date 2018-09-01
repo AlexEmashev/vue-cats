@@ -5,9 +5,8 @@ import axios from 'axios'
  */
 class httpService {
   constructor() {
-    console.log('✨ Http service created!')
     this.http = axios.create({
-      baseURL: `https://api.thecatapi.com/v1/images/`,
+      baseURL: `https://api.thecatapi.com/v1/`,
       headers: {
 
       }
@@ -17,13 +16,26 @@ class httpService {
   /**
    * Returns image in json format
    */
-  getRandomImage() {
+  getImage(params) {
+    const _params = {'format': 'json'}
+
+    if (params) {
+      _params = Object.assign(_params, ...params)
+    }
+
     return this.http.get(
-      'search', {
-        params: {
-          'format': 'json'
-        }
-      }
+      'images/search',
+      { params: _params }
+    )
+  }
+
+  /**
+   * Returns categories list
+   */
+  getCategories() {
+    return this.http.get(
+      'categories',
+      {'format': 'json'}
     )
   }
 }

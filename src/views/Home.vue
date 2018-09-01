@@ -1,10 +1,16 @@
 <template>
   <section class="home">
     <h1>This is a home page</h1>
-    <div v-if="inProgress">Loading...</div>
     <div class="categories">
-      <category-button v-for="category in categories" :key="category.id" :label="category.name"></category-button>
+      <category-button
+        v-for="category in categories"
+        :key="category.id"
+        :label="category.name"
+        :value="category.selected"
+        @input="categorySwitch(category.id)"
+        ></category-button>
     </div>
+    <div v-if="inProgress">Loading...</div>
     <image-box :src="imageSrc"></image-box>
     <button class="moar-button" @click="getImage">Moar!</button>
     <share-button>Share</share-button>
@@ -22,19 +28,6 @@ export default {
   store,
   data() {
     return {
-      httpService: null,
-      categories: [
-        {
-          id: 1,
-          name: 'category1',
-          selected: true
-        },
-        {
-          id: 2,
-          name: 'category2',
-          selected: false
-        }
-      ]
     }
   },
   components: {
@@ -48,14 +41,21 @@ export default {
     },
     imageSrc() {
       return store.state.imageURL
+    },
+    categories() {
+      return store.state.categories
     }
   },
   methods: {
     getImage() {
       this.$store.dispatch('getImage')
+    },
+    categorySwitch(id) {
+      this.$store.commit('toggleCategory', id)
     }
   },
   created() {
+    this.$store.dispatch('getCategories')
   }
 }
 </script>

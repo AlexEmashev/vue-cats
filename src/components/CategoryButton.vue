@@ -1,7 +1,7 @@
 <template>
   <label>
     {{label}}
-    <input type="checkbox">
+    <input type="checkbox" :checked="value" @input="$emit('input', $event.target.value)">
   </label>
 </template>
 
