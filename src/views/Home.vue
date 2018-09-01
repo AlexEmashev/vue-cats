@@ -2,14 +2,26 @@
   <section class="home">
     <h1>This is a home page</h1>
     <div class="categories">
-      <category-button
+      Categories:
+      <switch-button
         v-for="category in categories"
         :key="category.id"
         :label="category.name"
         :value="category.selected"
-        @input="categorySwitch(category.id)"
-        ></category-button>
+        @input="switchCategory(category.id)"
+        ></switch-button>
     </div>
+
+    <div class="types">
+    Types:
+      <switch-button v-for="imageType in imageTypes"
+        :key="imageType.id"
+        :label="imageType.name"
+        :value="imageType.selected"
+        @input="switchType(imageType.id)"
+      ></switch-button>
+    </div>
+
     <div v-if="inProgress">Loading...</div>
     <image-box :src="imageSrc"></image-box>
     <button class="moar-button" @click="getImage">Moar!</button>
@@ -18,50 +30,55 @@
 </template>
 
 <script>
-import ImageBox from '@/components/ImageBox.vue'
-import ShareButton from '@/components/ShareButton.vue'
-import CategoryButton from '@/components/CategoryButton.vue'
-import store from '@/store/store'
+import ImageBox from "@/components/ImageBox.vue";
+import ShareButton from "@/components/ShareButton.vue";
+import SwitchButton from "@/components/SwitchButton.vue";
+import store from "@/store/store";
 
 export default {
-  name: 'home',
+  name: "home",
   store,
   data() {
-    return {
-    }
+    return {};
   },
   components: {
-    'image-box': ImageBox,
-    'share-button': ShareButton,
-    'category-button': CategoryButton
+    "image-box": ImageBox,
+    "share-button": ShareButton,
+    "switch-button": SwitchButton
   },
   computed: {
     inProgress() {
-      return store.state.inProgress
+      return store.state.inProgress;
     },
     imageSrc() {
-      return store.state.imageURL
+      return store.state.imageURL;
     },
     categories() {
-      return store.state.categories
+      return store.state.categories;
+    },
+    imageTypes() {
+      return store.state.imageTypes;
     }
   },
   methods: {
     getImage() {
-      this.$store.dispatch('getImage')
+      this.$store.dispatch("getImage");
     },
-    categorySwitch(id) {
-      this.$store.commit('toggleCategory', id)
+    switchCategory(id) {
+      this.$store.commit("toggleCategory", id);
+    },
+    switchType(id) {
+      this.$store.commit("toggleImageType", id);
     }
   },
   created() {
-    this.$store.dispatch('getCategories')
+    this.$store.dispatch("getCategories");
   }
-}
+};
 </script>
 
 <style scoped lang="scss">
-  .home {
-    display: block;
-  }
+.home {
+  display: block;
+}
 </style>

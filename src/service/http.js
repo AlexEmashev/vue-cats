@@ -17,10 +17,11 @@ class httpService {
    * Returns image in json format
    */
   getImage(params) {
-    const _params = {'format': 'json'}
+    let _params = {'format': 'json'}
 
     if (params) {
-      _params = Object.assign(_params, ...params)
+      _params = {..._params, ...params}
+      console.log(_params)
     }
 
     return this.http.get(

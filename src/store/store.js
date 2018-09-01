@@ -11,6 +11,20 @@ export default new Vuex.Store({
      * List of categories
      */
     categories: [],
+    imageTypes: [
+      {
+        id: 0,
+        name: 'Image',
+        value: 'jpg,png',
+        selected: true
+      },
+      {
+        id: 1,
+        name: 'Gifs',
+        value: 'gif',
+        selected: true
+      }
+    ],
     /**
      * List of favorites
      */
@@ -58,6 +72,19 @@ export default new Vuex.Store({
         return category
       })
     },
+    /**
+     * Toggles image types
+     * @param {*} state
+     * @param {*} category image type to toggle.
+     */
+    toggleImageType(state, id) {
+      state.imageTypes.map(imageType => {
+        if (imageType.id === id) {
+          imageType.selected = !imageType.selected
+        }
+        return imageType
+      })
+    },
     imageLoading(state) {
       state.inProgress = true
     },
@@ -74,8 +101,16 @@ export default new Vuex.Store({
      */
     getImage(context, categoryIds) {
       context.commit('imageLoading')
+      let imageTypes = ''
 
-      HttpService.getImage()
+      for (let i = 0; i < context.state.imageTypes.length; i++) {
+        if (context.state.imageTypes[i].selected) {
+          imageTypes += context.state.imageTypes[i].value + ','
+        }
+      }
+
+      HttpService.getImage({'mime_types': imageTypes})
+
       .then((response) => {
         context.commit('imageLoaded', response.data[0].url)
       })
