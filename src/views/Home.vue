@@ -26,6 +26,7 @@
     <image-box :src="imageSrc"></image-box>
     <button class="moar-button" @click="getImage">Moar!</button>
     <share-button>Share</share-button>
+    <button @click="Favorite()">Favorite</button> {{isInFavorite}}
   </section>
 </template>
 
@@ -58,6 +59,9 @@ export default {
     },
     imageTypes() {
       return store.state.imageTypes;
+    },
+    isInFavorite() {
+      return store.getters.isInFavorite;
     }
   },
   methods: {
@@ -69,6 +73,9 @@ export default {
     },
     switchType(id) {
       this.$store.commit("toggleImageType", id);
+    },
+    Favorite() {
+      this.$store.commit('favorite', store.state.imageURL)
     }
   },
   created() {
