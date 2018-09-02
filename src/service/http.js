@@ -21,7 +21,6 @@ class httpService {
 
     if (params) {
       _params = {..._params, ...params}
-      console.log(_params)
     }
 
     return this.http.get(

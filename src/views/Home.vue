@@ -26,7 +26,7 @@
     <image-box :src="imageSrc"></image-box>
     <button class="moar-button" @click="getImage">Moar!</button>
     <share-button>Share</share-button>
-    <button @click="Favorite()">Favorite</button> {{isInFavorite}}
+    <button @click="Favorite()" :disabled="!imageSrc">Favorite</button> {{isInFavorite}}
   </section>
 </template>
 
@@ -79,7 +79,15 @@ export default {
     }
   },
   created() {
-    this.$store.dispatch("getCategories");
+    // Load image if present
+    if (this.$route.params.imageId) {
+      this.$store.commit("setImageURL", this.$route.params.imageId);
+    } else if (this.$store.state.imageURL === '') { // If there were no image previously on store
+      this.$store.dispatch("getImage");
+    }
+    if (store.state.categories.length === 0) { // Load categories once
+      this.$store.dispatch("getCategories");
+    }
   }
 };
 </script>

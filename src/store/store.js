@@ -48,7 +48,6 @@ export default new Vuex.Store({
      */
     isInFavorite: state => {
       for (let i = 0; i < state.favorites.length; i++) {
-        console.log(`image: ${state.imageURL}, favorited: ${state.favorites[i]}`)
         if (state.imageURL === state.favorites[i]){
           return true
         }
@@ -112,6 +111,9 @@ export default new Vuex.Store({
     imageLoaded(state, imageURL) {
       state.imageURL = imageURL;
       state.inProgress = false;
+    },
+    setImageURL(state, url) {
+      state.imageURL = url
     }
   },
   actions: {
@@ -119,9 +121,8 @@ export default new Vuex.Store({
     /**
      * Returns image object from remote resource
      * @param {*} context
-     * @param {Array} categoryIds
      */
-    getImage(context, categoryIds) {
+    getImage(context) {
       context.commit("imageLoading");
       let imageTypes = "";
 

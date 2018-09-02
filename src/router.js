@@ -10,8 +10,12 @@ export default new Router({
   routes: [
     {
       path: '/',
+      redirect: '/home'
+    },
+    {
+      path: '/home/:imageId?',
       name: 'home',
-      component: Home
+      component: Home,
     },
     {
       path: '/about',
