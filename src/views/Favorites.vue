@@ -10,7 +10,9 @@
           <router-link :to="{name: 'home', params: { imageId: favorite }}">
             <img :src="favorite" alt="">
           </router-link>
-          <button @click="removeFromFavorite(favorite)">Remove</button>
+          <button
+            class="btn"
+            @click="removeFromFavorite(favorite)">Remove</button>
         </li>
       </ul>
 

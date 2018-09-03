@@ -24,9 +24,9 @@
 
     <div v-if="inProgress">Loading...</div>
     <image-box :src="imageSrc"></image-box>
-    <button class="moar-button" @click="getImage">Moar!</button>
+    <button class="btn moar-button" @click="getImage">Moar!</button>
     <share-button>Share</share-button>
-    <button @click="Favorite()" :disabled="!imageSrc">Favorite</button> {{isInFavorite}}
+    <button class="btn" @click="Favorite()" :disabled="!imageSrc">Favorite</button> {{isInFavorite}}
   </section>
 </template>
 
@@ -66,27 +66,27 @@ export default {
   },
   methods: {
     getImage() {
-      this.$store.dispatch("getImage");
+      store.dispatch("getImage");
     },
     switchCategory(id) {
-      this.$store.commit("toggleCategory", id);
+      store.commit("toggleCategory", id);
     },
     switchType(id) {
-      this.$store.commit("toggleImageType", id);
+      store.commit("toggleImageType", id);
     },
     Favorite() {
-      this.$store.commit('favorite', store.state.imageURL)
+      store.commit('favorite', store.state.imageURL)
     }
   },
   created() {
     // Load image if present
     if (this.$route.params.imageId) {
-      this.$store.commit("setImageURL", this.$route.params.imageId);
-    } else if (this.$store.state.imageURL === '') { // If there were no image previously on store
-      this.$store.dispatch("getImage");
+      store.commit("setImageURL", this.$route.params.imageId);
+    } else if (store.state.imageURL === '') { // If there were no image previously on store
+      store.dispatch("getImage");
     }
     if (store.state.categories.length === 0) { // Load categories once
-      this.$store.dispatch("getCategories");
+      store.dispatch("getCategories");
     }
   }
 };

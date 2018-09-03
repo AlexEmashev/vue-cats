@@ -4,7 +4,8 @@
       <span>Sorry</span>
       <span>no image available</span>
     </div>
-    <img v-else class="image" :src="src" alt="Main image">
+    <div class="image" :style="{backgroundImage: 'url(' + src + ')'}"></div>
+    <!-- <img v-else class="image" :src="src" alt="Main image"> -->
   </figure>
 </template>
 
@@ -22,14 +23,32 @@ export default {
 
 <style scoped lang="scss">
 .image-container {
+  // Hack to make image container maintain proportions
   display: block;
-  margin: 0;
+  margin: 25px auto;
   width: 100%;
+  position: relative;
+  //height: 100%;
+  max-width: 425px;
+  //max-height: 425px;
+  &:before {
+    content: "";
+    float: left;
+    padding-bottom: 80%;
+  }
+  &:after {
+    content: "";
+    display: table;
+    clear: both;
+  }
 }
 .image {
-  display: block;
-  width: 100%;
-  height: auto;
+  // Hack to make image fit to parent container
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  position: absolute;
+  height: 100%;
 }
 .no-image {
   display: flex;
