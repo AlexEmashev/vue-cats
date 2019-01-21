@@ -12,10 +12,14 @@
 </template>
 
 <style lang="scss">
-$font-color: #000;
-$font-color-active: #fff;
+// Variables
 $bg-color: #ff5926;
 $fg-color: #fff;
+$font-color: #000;
+$font-color-active: $fg-color;
+
+
+// Main classes
 #app {
   font-family: "Avenir", Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -39,23 +43,42 @@ $fg-color: #fff;
   max-width: 640px;
 }
 .btn {
+  color: darken($font-color-active, 15%);
   background: darken($bg-color, 5%);
   font-weight: 100;
-  color: $fg-color;
   cursor: pointer;
-  width: 100%;
-  max-width: 160px;
   text-decoration: none;
-  text-transform: uppercase;
-  border: 1px solid $fg-color;
   font-size: 16px;
   line-height: 45px;
   transition: all .5s cubic-bezier(0, 0.91, 0.22, 1);
+  outline: 0;
+
+  .btn-image {
+    height: 32px;
+    width: 32px;
+    fill: darken($font-color-active, 15%);
+  }
 
   &:hover {
-    font-weight: 600;
-    letter-spacing: 2px;
+    color: $fg-color;
+    .btn-image {
+      fill: $font-color-active;
+    }
   }
+  &-primary {
+    border: 1px solid $fg-color;
+    max-width: 160px;
+    width: 100%;
+    text-transform: uppercase;
+  }
+
+  &-icon {
+    background: none;
+    border: none;
+  }
+}
+
+.heart {
 }
 
 </style>

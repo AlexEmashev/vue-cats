@@ -49,6 +49,7 @@ export default {
   background-position: center;
   position: absolute;
   height: 100%;
+  width: 100%;
 }
 .no-image {
   display: flex;
