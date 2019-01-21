@@ -27,6 +27,7 @@ $font-color-active: $fg-color;
   text-align: center;
   color: $font-color;
 }
+
 #nav {
   padding: 30px;
   a {
@@ -37,6 +38,7 @@ $font-color-active: $fg-color;
     }
   }
 }
+
 .content {
   display: block;
   margin: 0 auto;
@@ -45,6 +47,8 @@ $font-color-active: $fg-color;
 .btn {
   color: darken($font-color-active, 15%);
   background: darken($bg-color, 5%);
+  padding: 0;
+  margin: 0;
   font-weight: 100;
   cursor: pointer;
   text-decoration: none;
@@ -52,11 +56,14 @@ $font-color-active: $fg-color;
   line-height: 45px;
   transition: all .5s cubic-bezier(0, 0.91, 0.22, 1);
   outline: 0;
+  &:not(:last-of-type) {
+    margin-right: 7px;
+  }
 
   .btn-image {
     height: 32px;
     width: 32px;
-    fill: darken($font-color-active, 15%);
+    fill: darken($font-color-active, 15%); 
   }
 
   &:hover {
@@ -66,19 +73,30 @@ $font-color-active: $fg-color;
     }
   }
   &-primary {
-    border: 1px solid $fg-color;
-    max-width: 160px;
-    width: 100%;
+    padding: 7px 22px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    border: 3px solid darken($fg-color, 15%);
+    border-radius: 7px;
+    font-size: 28px;
+    background: none;
     text-transform: uppercase;
+    user-select: none;
+    &:hover {
+      border-color: $fg-color
+    }
+    &:active {
+      background: transparentize($fg-color, .8);
+    }
   }
 
   &-icon {
     background: none;
     border: none;
+    font-size: 0;
+    line-height: 0;
   }
 }
-
-.heart {
-}
-
 </style>

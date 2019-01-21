@@ -25,7 +25,7 @@ export default {
 .image-container {
   // Hack to make image container maintain proportions
   display: block;
-  margin: 25px auto;
+  margin: 0 auto;
   width: 100%;
   position: relative;
   //height: 100%;
@@ -47,6 +47,7 @@ export default {
   background-size: contain;
   background-repeat: no-repeat;
   background-position: center;
+  background-color: #00000036;
   position: absolute;
   height: 100%;
   width: 100%;
