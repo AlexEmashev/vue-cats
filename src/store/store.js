@@ -111,6 +111,11 @@ export default new Vuex.Store({
     imageLoaded(state, imageURL) {
       state.imageURL = imageURL;
       state.inProgress = false;
+      if (!imageURL) {
+        state.error = true;
+      } else {
+        state.error = false;
+      }
     },
     setImageURL(state, url) {
       state.imageURL = url

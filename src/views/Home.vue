@@ -22,11 +22,15 @@
       ></switch-button>
     </div>
 
-    <div v-if="inProgress">Loading...</div>
-    <image-box class="image-box" v-else :src="imageSrc"></image-box>
+    <image-box class="image-box" :isLoading="inProgress" :isError="isError" :src="imageSrc"></image-box>
 
-    <figure v-if="!inProgress" class="buttons-secondary">
-      <button class="btn btn-icon" @click="Favorite()" :disabled="!imageSrc">
+    <figure class="buttons-secondary">
+      <button
+        v-if="!inProgress"
+        class="btn btn-icon"
+        @click="Favorite()"
+        :disabled="!imageSrc"
+      >
         <svg
           class="btn-image"
           v-if="isInFavorite"
@@ -56,7 +60,7 @@
         </svg>
       </button>
 
-      <share-button>
+      <share-button v-if="!inProgress">
         <svg
           class="btn-image"
           xmlns="http://www.w3.org/2000/svg"
@@ -127,6 +131,9 @@ export default {
     },
     isInFavorite() {
       return store.getters.isInFavorite;
+    },
+    isError() {
+      return store.state.error;
     }
   },
   methods: {
@@ -185,11 +192,12 @@ export default {
 }
 
 .image-box {
-  margin-top: 27px;
+  margin-top: 45px;
 }
 
 .buttons-secondary {
-  max-width: 425px;
+  height: 32px;
+  max-width: $container-max-width;
   margin: 7px auto;
   text-align: right;
 }

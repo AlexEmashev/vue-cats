@@ -33,6 +33,8 @@ export default {
   padding: 3px 8px 3px 6px;
   color: $control-bg-color;
   user-select: none;
+  transition: all .3s;
+  cursor: pointer;
 
   :before {
       display: inline-block;

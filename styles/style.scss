@@ -1,5 +1,5 @@
 // Global Variables
-$bg-color: #ff5926;
+$bg-color: #ea6a32;
 $fg-color: #fff;
 $font-color: #000;
 $font-color-darker: desaturate(darken($bg-color, 30%), 40%);
@@ -12,3 +12,6 @@ $control-bg-inactive-color: transparentize(#000, .85);
 $control-font-color: darken($fg-color, 15%);
 $control-font-hover-color: $fg-color;
 $control-font-active-color: $fg-color;
+
+
+$container-max-width: 480px;
