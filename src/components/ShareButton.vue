@@ -1,5 +1,5 @@
 <template>
-  <button class="btn btn-icon">
+  <button :disabled="disabled" class="btn btn-icon">
     <slot></slot>
   </button>
 </template>
@@ -9,8 +9,7 @@ export default {
   data() {
     return {}
   },
-  props: {
-  },
+  props: ["disabled"],
   computed: {
   },
   methods: {

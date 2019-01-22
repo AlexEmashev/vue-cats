@@ -35,6 +35,7 @@ export default {
   position: relative;
   max-width: $container-max-width;
   background-color: #00000036;
+  border-radius: 6px;
 
   &:before {
     content: "";

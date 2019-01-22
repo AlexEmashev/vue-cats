@@ -14,7 +14,6 @@
 <style lang="scss">
 @import "../styles/style.scss";
 
-
 // Main classes
 #app {
   font-family: "Avenir", Helvetica, Arial, sans-serif;
@@ -56,10 +55,17 @@
     margin-right: 7px;
   }
 
+  &:disabled, &:disabled:hover {
+    cursor: auto;
+    .btn-image {
+      fill: $font-color-darker;
+    }
+  }
+
   .btn-image {
     height: 32px;
     width: 32px;
-    fill: darken($font-color-active, 15%); 
+    fill: darken($font-color-active, 15%);
   }
 
   &:hover {

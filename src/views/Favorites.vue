@@ -1,18 +1,22 @@
 <template>
   <div class="favorites">
-    <h1>Favorite cats</h1>
     <div class="favorites-list" v-if="favorites.length > 0">
       <ul>
         <li
           v-for="(favorite, index) in favorites"
           :key="index"
         >
-          <router-link :to="{name: 'home', params: { imageId: favorite }}">
-            <img :src="favorite" alt="">
-          </router-link>
-          <button
+          <!-- <router-link :to="{name: 'home', params: { imageId: favorite }}"> -->
+            <image-card class="image-card" 
+              :imageSrc="favorite"
+              :isInFavorite="true"
+              @favorite="removeFromFavorite"
+            >
+            </image-card>
+          <!-- </router-link> -->
+          <!-- <button
             class="btn"
-            @click="removeFromFavorite(favorite)">Remove</button>
+            @click="removeFromFavorite(favorite)">Remove</button> -->
         </li>
       </ul>
 
@@ -25,17 +29,21 @@
 
 <script>
 import store from "@/store/store";
+import ImageCard from "@/components/ImageCard.vue";
 
 export default {
   store,
+  components: {
+    "image-card": ImageCard
+  },
   computed: {
     favorites() {
       return store.state.favorites;
     }
   },
   methods: {
-    removeFromFavorite(imageUrl) {
-      store.commit("favorite", imageUrl);
+    removeFromFavorite(url) {
+      store.commit("favorite", url);
     }
   }
 };
