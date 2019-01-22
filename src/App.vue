@@ -12,11 +12,7 @@
 </template>
 
 <style lang="scss">
-// Variables
-$bg-color: #ff5926;
-$fg-color: #fff;
-$font-color: #000;
-$font-color-active: $fg-color;
+@import "../styles/style.scss";
 
 
 // Main classes

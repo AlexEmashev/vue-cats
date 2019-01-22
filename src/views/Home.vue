@@ -1,7 +1,7 @@
 <template>
   <section class="home">
-    <h1>This is a home page</h1>
-    <div class="categories">Categories:
+    <div class="categories">
+      <span class="categories-label">Categories:</span>
       <switch-button
         v-for="category in categories"
         :key="category.id"
@@ -11,7 +11,8 @@
       ></switch-button>
     </div>
 
-    <div class="types">Types:
+    <div class="types">
+      <span class="types-label">Types:</span>
       <switch-button
         v-for="imageType in imageTypes"
         :key="imageType.id"
@@ -159,8 +160,28 @@ export default {
 </script>
 
 <style scoped lang="scss">
+@import "../../styles/style.scss";
+
 .home {
   display: block;
+}
+
+.categories {
+  margin-bottom: 9px;
+
+  &-label {
+    color: $font-color-darker;
+    font-weight: 600;
+    margin-right: .5em;
+  }
+}
+
+.types {
+  &-label {
+    color: $font-color-darker;
+    font-weight: 600;
+    margin-right: .5em;
+  }
 }
 
 .image-box {
