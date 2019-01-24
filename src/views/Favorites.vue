@@ -10,6 +10,9 @@
             <image-card class="image-card" 
               :imageSrc="favorite"
               :isInFavorite="true"
+              :shareUrl="shareUrl + '?imageId=' + favorite"
+              :shareTitle="shareTitle"
+              :shareDescription="shareDescription"
               @favorite="removeFromFavorite"
             >
             </image-card>
@@ -39,6 +42,15 @@ export default {
   computed: {
     favorites() {
       return store.state.favorites;
+    },
+    shareTitle() {
+      return process.env.VUE_APP_Title
+    },
+    shareDescription() {
+      return process.env.VUE_APP_Description
+    },
+    shareUrl() {
+      return process.env.VUE_APP_URL
     }
   },
   methods: {

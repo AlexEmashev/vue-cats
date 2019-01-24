@@ -26,6 +26,9 @@
       :isError="isError"
       :isInFavorite="isInFavorite"
       :imageSrc="imageSrc"
+      :shareUrl="shareUrl"
+      :shareTitle="shareTitle"
+      :shareDescription="shareDescription"
       @favorite="favorite"
     >
     </image-card>
@@ -56,12 +59,15 @@
 import ImageCard from "@/components/ImageCard.vue";
 import SwitchButton from "@/components/SwitchButton.vue";
 import store from "@/store/store";
+import appConstants from "@/service/appConstants";
 
 export default {
   name: "home",
   store,
   data() {
-    return {};
+    return {
+      
+    };
   },
   components: {
     "image-card": ImageCard,
@@ -85,7 +91,17 @@ export default {
     },
     isError() {
       return store.state.error;
+    },
+    shareTitle() {
+      return process.env.VUE_APP_Title
+    },
+    shareDescription() {
+      return process.env.VUE_APP_Description
+    },
+    shareUrl() {
+      return process.env.VUE_APP_URL + '?imageId=' +store.state.imageURL;
     }
+    
   },
   methods: {
     getImage() {
@@ -103,8 +119,8 @@ export default {
   },
   created() {
     // Load image if present
-    if (this.$route.params.imageId) {
-      store.commit("setImageURL", this.$route.params.imageId);
+    if (this.$route.query.imageId) {
+      store.commit("setImageURL", this.$route.query.imageId);
     } else if (store.state.imageURL === "") {
       // If there were no image previously on store
       store.dispatch("getImage");

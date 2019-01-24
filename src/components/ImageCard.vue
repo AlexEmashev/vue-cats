@@ -38,7 +38,12 @@
         </svg>
       </button>
 
-      <share-button :disabled="!imageSrc || isLoading">
+      <share-button
+        :url="shareUrl"
+        :shareTitle="shareTitle"
+        :shareDescription="shareDescription"
+        :disabled="!imageSrc || isLoading"
+      >
         <svg
           class="btn-image"
           xmlns="http://www.w3.org/2000/svg"
@@ -66,7 +71,15 @@ export default {
   data() {
     return {};
   },
-  props: ["imageSrc", "isLoading", "isInFavorite", "isError"],
+  props: [
+    "imageSrc",
+    "isLoading",
+    "isInFavorite",
+    "isError",
+    "shareUrl",
+    "shareTitle",
+    "shareDescription"
+  ],
   components: {
     "image-box": ImageBox,
     "share-button": ShareButton,

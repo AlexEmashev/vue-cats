@@ -86,11 +86,14 @@
     background: none;
     text-transform: uppercase;
     user-select: none;
+    box-shadow: 4px 4px $control-bg-inactive-color;
     &:hover {
-      border-color: $fg-color
+      border-color: $fg-color;
+      box-shadow: 4px 4px $control-bg-inactive-hover-color;
     }
     &:active {
       background: transparentize($fg-color, .8);
+      box-shadow: none;
     }
   }
 
