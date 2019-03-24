@@ -16,3 +16,10 @@ $control-font-active-color: $fg-color;
 
 
 $container-max-width: 480px;
+
+// Breakpoints
+
+$break-xs: 320px; // 320px;
+$break-sm: 768px; // 768px
+$break-md: 992px; // 1024px
+$break-lg: 1260px; // 1200px

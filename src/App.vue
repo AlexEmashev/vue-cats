@@ -1,10 +1,15 @@
 <template>
   <div id="app">
-    <div id="nav">
-      <router-link to="/home">Home</router-link> |
-      <router-link to="/favorites">Favorites</router-link> |
-      <router-link to="/about">About</router-link>
-    </div>
+    <header class="header">
+      <div class="logo">
+        <img src="/cat_logo.svg"> <h1>Vue Cats</h1>
+      </div>
+      <div class="nav" id="nav">
+        <router-link to="/home">Home</router-link> |
+        <router-link to="/favorites">Favorites</router-link> |
+        <router-link to="/about">About</router-link>
+      </div>
+    </header>
     <article class="content">
     <router-view/>
     </article>
@@ -21,10 +26,51 @@
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: $font-color;
+  margin: 0;
+  @media (min-width: $break-sm) {
+    padding: 0 2rem;
+  }
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  position: relative;
+  flex-direction: column;
+  margin-top: 2rem;
+  @media (min-width: $break-sm) {
+    margin-top: 0;
+    flex-direction: row;
+  }
+}
+
+.logo {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  position: relative;
+  // min-width: 100%;
+  @media (min-width: $break-sm) {
+    position: absolute;
+  }
+  img {
+    width: 60px;
+    height: 60px;
+  }
+  h1 {
+    color: $fg-color;
+    font-size: 30px;
+    font-weight: lighter;
+    margin: auto 10px;
+  }
 }
 
 #nav {
-  padding: 30px;
+  min-width: 100%;
+    padding: .3rem 0 2rem 0;
+  @media (min-width: $break-sm) {
+    padding: 30px;
+  }
   a {
     font-weight: bold;
     color: $font-color;
