@@ -1,27 +1,35 @@
 <template>
   <section class="home">
-    <div class="categories">
-      <span class="categories-label">Categories:</span>
-      <switch-button
-        v-for="category in categories"
-        :key="category.id"
-        :label="category.name"
-        :value="category.selected"
-        @input="switchCategory(category.id)"
-      ></switch-button>
+    <div class="categories panel">
+      <div @click="filtersExpanded = !filtersExpanded" class="panel-header">
+        <span class="panel-title">Categories & Types</span>
+        <span v-if="!filtersExpanded" class="panel-open">+</span>
+        <span v-else class="panel-close">-</span>
+      </div>
+      <div class="panel-content" v-bind:class="{'panel-collapsed':!filtersExpanded}">
+        <span class="categories-label">Categories:</span>
+        <switch-button
+          v-for="category in categories"
+          :key="category.id"
+          :label="category.name"
+          :value="category.selected"
+          @input="switchCategory(category.id)"
+        ></switch-button>
+
+      <div class="types">
+        <span class="types-label">Types:</span>
+        <switch-button
+          v-for="imageType in imageTypes"
+          :key="imageType.id"
+          :label="imageType.name"
+          :value="imageType.selected"
+          @input="switchType(imageType.id)"
+        ></switch-button>
+      </div>
+      </div>
     </div>
 
-    <div class="types">
-      <span class="types-label">Types:</span>
-      <switch-button
-        v-for="imageType in imageTypes"
-        :key="imageType.id"
-        :label="imageType.name"
-        :value="imageType.selected"
-        @input="switchType(imageType.id)"
-      ></switch-button>
-    </div>
-    <image-card 
+    <image-card
       :isLoading="inProgress"
       :isError="isError"
       :isInFavorite="isInFavorite"
@@ -30,8 +38,7 @@
       :shareTitle="shareTitle"
       :shareDescription="shareDescription"
       @favorite="favorite"
-    >
-    </image-card>
+    ></image-card>
     <button class="btn btn-primary moar-button" @click="getImage">
       <svg
         class="btn-image moar-icon"
@@ -51,7 +58,6 @@
       </svg>
       <span class="moar-text">Moar!</span>
     </button>
-
   </section>
 </template>
 
@@ -66,7 +72,7 @@ export default {
   store,
   data() {
     return {
-      
+      filtersExpanded: false
     };
   },
   components: {
@@ -93,15 +99,14 @@ export default {
       return store.state.error;
     },
     shareTitle() {
-      return process.env.VUE_APP_Title
+      return process.env.VUE_APP_Title;
     },
     shareDescription() {
-      return process.env.VUE_APP_Description
+      return process.env.VUE_APP_Description;
     },
     shareUrl() {
-      return process.env.VUE_APP_URL + '?imageId=' +store.state.imageURL;
+      return process.env.VUE_APP_URL + "?imageId=" + store.state.imageURL;
     }
-    
   },
   methods: {
     getImage() {
@@ -146,7 +151,7 @@ export default {
   &-label {
     color: $font-color-darker;
     font-weight: 600;
-    margin-right: .5em;
+    margin-right: 0.5em;
   }
 }
 
@@ -154,7 +159,7 @@ export default {
   &-label {
     color: $font-color-darker;
     font-weight: 600;
-    margin-right: .5em;
+    margin-right: 0.5em;
   }
 }
 

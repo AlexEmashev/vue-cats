@@ -37,7 +37,7 @@
   align-items: center;
   position: relative;
   flex-direction: column;
-  margin-top: 2rem;
+  margin-top: .5rem;
   @media (min-width: $break-sm) {
     margin-top: 0;
     flex-direction: row;
@@ -65,9 +65,43 @@
   }
 }
 
+.panel-header {
+  background-color: darken($bg-color, 10%);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 6px 9px;
+  cursor: pointer;
+  color: $fg-color;
+  font-weight: 600;
+  border-radius: $control-border-radius $control-border-radius 0 0;
+  @media (min-width: $break-sm) {
+    display: none;
+  }
+}
+
+.panel-content {
+  background-color: darken($bg-color, 6%);
+  padding: 1rem;
+  border-radius: 0 0 $control-border-radius $control-border-radius;
+  @media (min-width: $break-sm) {
+    background: transparent;
+    padding: 0;
+  }
+  &.panel-collapsed {
+    height: 0;
+    overflow: hidden;
+    padding: 0;
+    @media (min-width: $break-sm) {
+    padding: inherit;
+    height: inherit;
+    }
+  }
+}
+
 #nav {
   min-width: 100%;
-    padding: .3rem 0 2rem 0;
+    padding: .3rem 0 1rem 0;
   @media (min-width: $break-sm) {
     padding: 30px;
   }
@@ -127,7 +161,7 @@
     justify-content: center;
     align-items: center;
     border: 3px solid darken($fg-color, 15%);
-    border-radius: 7px;
+    border-radius: $control-border-radius;
     font-size: 28px;
     background: none;
     text-transform: uppercase;

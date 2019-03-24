@@ -1,6 +1,6 @@
 <template>
   <figure class="image-card">
-    <image-box 
+    <image-box
       class="image-box"
       :isLoading="isLoading"
       :isError="isError"
@@ -96,10 +96,6 @@ export default {
 
 <style scoped lang="scss">
 @import "../../styles/style.scss";
-.image-box {
-  margin-top: 45px;
-}
-
 .buttons-secondary {
   height: 32px;
   max-width: $container-max-width;
