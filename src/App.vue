@@ -158,7 +158,7 @@ export default {
     background: none;
     text-transform: uppercase;
     user-select: none;
-    box-shadow: 4px 4px $control-bg-inactive-color;
+    box-shadow: 4px 4px $bg-darker-color;
     &:hover {
       border-color: $fg-color;
       box-shadow: 4px 4px $control-bg-inactive-hover-color;
