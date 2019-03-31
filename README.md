@@ -1,7 +1,8 @@
-![Logo](public/favicon.svg)
 
 
 # About
+
+![Logo](public/favicon.svg)
 
 ## Description
 
