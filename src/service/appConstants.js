@@ -1,3 +1,4 @@
 export default {
-  appUrl: "hello world"
+  appUrl: "hello world",
+
 }

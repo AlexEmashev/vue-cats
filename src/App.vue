@@ -13,8 +13,25 @@
     <article class="content">
     <router-view/>
     </article>
+    <footer class="footer">
+      <span class="footer-info">
+        This project is provided under The MIT License. Copyright 2019 <a href="https://github.com/AlexEmashev">Alexander&nbsp;Emashev</a>.
+      </span>
+    </footer>
   </div>
 </template>
+
+<script>
+import store from "@/store/store";
+
+export default {
+  name: "App",
+  store,
+  created() {
+    store.commit("getSavedFavorites");
+  }
+}
+</script>
 
 <style lang="scss">
 @import "../styles/style.scss";
@@ -27,6 +44,12 @@
   text-align: center;
   color: $font-color;
   margin: 0;
+  height: 100%;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  padding-left: 10px;
+  padding-right: 10px;
   @media (min-width: $break-sm) {
     padding: 0 2rem;
   }
@@ -34,6 +57,7 @@
 
 .header {
   display: flex;
+  flex: 0;
   align-items: center;
   position: relative;
   flex-direction: column;
@@ -65,45 +89,11 @@
   }
 }
 
-.panel-header {
-  background-color: darken($bg-color, 10%);
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 6px 9px;
-  cursor: pointer;
-  color: $fg-color;
-  font-weight: 600;
-  border-radius: $control-border-radius $control-border-radius 0 0;
-  @media (min-width: $break-sm) {
-    display: none;
-  }
-}
-
-.panel-content {
-  background-color: darken($bg-color, 6%);
-  padding: 1rem;
-  border-radius: 0 0 $control-border-radius $control-border-radius;
-  @media (min-width: $break-sm) {
-    background: transparent;
-    padding: 0;
-  }
-  &.panel-collapsed {
-    height: 0;
-    overflow: hidden;
-    padding: 0;
-    @media (min-width: $break-sm) {
-    padding: inherit;
-    height: inherit;
-    }
-  }
-}
-
 #nav {
   min-width: 100%;
     padding: .3rem 0 1rem 0;
   @media (min-width: $break-sm) {
-    padding: 30px;
+    padding: 30px 0;
   }
   a {
     font-weight: bold;
@@ -118,6 +108,8 @@
   display: block;
   margin: 0 auto;
   max-width: 640px;
+  width: 100%;
+  flex: 1 1 auto;
 }
 .btn {
   color: darken($font-color-active, 15%);
@@ -184,4 +176,15 @@
     line-height: 0;
   }
 }
+
+  .footer {
+    padding: 1em;
+    font-size: 11px;
+    color: $fg-color;
+  }
+
+  a {
+    color: $fg-color;
+
+  }
 </style>

@@ -7,7 +7,7 @@
           :key="index"
         >
           <!-- <router-link :to="{name: 'home', params: { imageId: favorite }}"> -->
-            <image-card class="image-card" 
+            <image-card class="image-card"
               :imageSrc="favorite"
               :isInFavorite="true"
               :shareUrl="shareUrl + '?imageId=' + favorite"
@@ -60,4 +60,15 @@ export default {
   }
 };
 </script>
+
+<style scoped lang="scss">
+  .favorites {
+    margin-top: 30px;
+    margin-bottom: 30px;
+  }
+  .image-card {
+    margin-bottom: 30px;
+  }
+
+</style>
 

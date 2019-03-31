@@ -1,31 +1,88 @@
 <template>
   <section class="home">
-    <div class="categories panel">
+    <div class="filters-panel">
       <div @click="filtersExpanded = !filtersExpanded" class="panel-header">
-        <span class="panel-title">Categories & Types</span>
-        <span v-if="!filtersExpanded" class="panel-open">+</span>
-        <span v-else class="panel-close">-</span>
+        <div class="panel-header-wrapper">
+          <span class="panel-title">
+            <!-- <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="48"
+              height="48"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="#ffffff"
+              stroke-width="3"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <line x1="4" y1="21" x2="4" y2="14"></line>
+              <line x1="4" y1="10" x2="4" y2="3"></line>
+              <line x1="12" y1="21" x2="12" y2="12"></line>
+              <line x1="12" y1="8" x2="12" y2="3"></line>
+              <line x1="20" y1="21" x2="20" y2="16"></line>
+              <line x1="20" y1="12" x2="20" y2="3"></line>
+              <line x1="1" y1="14" x2="7" y2="14"></line>
+              <line x1="9" y1="8" x2="15" y2="8"></line>
+              <line x1="17" y1="16" x2="23" y2="16"></line>
+            </svg> -->
+            Filters
+          </span>
+          <span v-if="!filtersExpanded" class="panel-open">
+            <svg
+              class="panel-icon"
+              xmlns="http://www.w3.org/2000/svg"
+              width="48"
+              height="48"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="#ffffff"
+              stroke-width="3"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <path d="M9 18l6-6-6-6"></path>
+            </svg>
+          </span>
+          <span v-else class="panel-close">
+            <svg
+              class="panel-icon"
+              xmlns="http://www.w3.org/2000/svg"
+              width="48"
+              height="48"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="#ffffff"
+              stroke-width="3"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <path d="M6 9l6 6 6-6"></path>
+            </svg>
+          </span>
+        </div>
       </div>
       <div class="panel-content" v-bind:class="{'panel-collapsed':!filtersExpanded}">
-        <span class="categories-label">Categories:</span>
-        <switch-button
-          v-for="category in categories"
-          :key="category.id"
-          :label="category.name"
-          :value="category.selected"
-          @input="switchCategory(category.id)"
-        ></switch-button>
+        <div class="categories">
+          <span class="categories-label">Categories:</span>
+          <switch-button
+            v-for="category in categories"
+            :key="category.id"
+            :label="category.name"
+            :value="category.selected"
+            @input="switchCategory(category.id)"
+          ></switch-button>
+        </div>
 
-      <div class="types">
-        <span class="types-label">Types:</span>
-        <switch-button
-          v-for="imageType in imageTypes"
-          :key="imageType.id"
-          :label="imageType.name"
-          :value="imageType.selected"
-          @input="switchType(imageType.id)"
-        ></switch-button>
-      </div>
+        <div class="types">
+          <span class="types-label">Types:</span>
+          <switch-button
+            v-for="imageType in imageTypes"
+            :key="imageType.id"
+            :label="imageType.name"
+            :value="imageType.selected"
+            @input="switchType(imageType.id)"
+          ></switch-button>
+        </div>
       </div>
     </div>
 
@@ -145,14 +202,22 @@ export default {
   display: block;
 }
 
-.categories {
+.filters-panel {
   margin-bottom: 9px;
+  text-align: left;
+  @media (min-width: $break-sm) {
+    margin-bottom: 30px;
+    text-align: center;
+  }
+}
 
+.categories {
   &-label {
     color: $font-color-darker;
     font-weight: 600;
     margin-right: 0.5em;
   }
+  margin-bottom: 7px;
 }
 
 .types {
@@ -174,5 +239,65 @@ export default {
     font-weight: normal;
     font-size: 28px;
   }
+}
+
+.panel-header {
+  // background-color: darken($bg-color, 10%);
+  display: block;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 6px 9px;
+  user-select: none;
+  cursor: pointer;
+  color: $fg-color;
+  font-weight: 600;
+  border-radius: $control-border-radius $control-border-radius 0 0;
+  @media (min-width: $break-sm) {
+    display: none;
+  }
+
+  &-wrapper {
+    display: flex;
+    align-items: center;
+  }
+}
+
+.panel-title {
+  padding-right: 5px;
+  font-size: 13px;
+}
+
+.panel-content {
+  // background-color: darken($bg-color, 6%);
+  padding: 0 0 1rem;
+  // border-radius: 0 0 $control-border-radius $control-border-radius;
+  @media (min-width: $break-sm) {
+    background: transparent;
+    padding: 0;
+  }
+  &.panel-collapsed {
+    height: 0;
+    overflow: hidden;
+    padding: 0;
+    @media (min-width: $break-sm) {
+      padding: inherit;
+      height: inherit;
+    }
+  }
+}
+
+.panel-icon {
+  display: flex;
+  align-content: center;
+  width: 19px;
+  height: 19px;
+}
+.panel-spacer {
+  flex: 1 1 auto;
+}
+
+.categories-label,
+.types-label {
+  font-size: 13px;
 }
 </style>

@@ -34,7 +34,7 @@ export default {
   width: 100%;
   position: relative;
   max-width: $container-max-width;
-  background-color: #00000036;
+  background-color: $bg-darker-color;
   border-radius: 6px;
 
   &:before {

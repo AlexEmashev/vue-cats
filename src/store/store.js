@@ -1,6 +1,7 @@
 import Vue from "vue";
 import Vuex from "vuex";
 import { HttpService } from "@/service/http";
+import { StorageApi } from "@/service/storageApi";
 
 Vue.use(Vuex);
 
@@ -58,17 +59,31 @@ export default new Vuex.Store({
   },
   mutations: {
     /**
+     * Gets favorite images from local storage.
+     * @param {*} state
+     */
+    getSavedFavorites(state) {
+      const savedFavorites = StorageApi.getFavorites();
+      if (Array.isArray(savedFavorites)) {
+        state.favorites = [...savedFavorites];
+      } else {
+        state.favorites = [];
+      }
+    },
+    /**
      * Adds or removes an item from favorite
      * @param {*} state
      * @param {*} imageUrl link to image
      */
     favorite(state, imageUrl) {
-      let indexOfFavorite = state.favorites.indexOf(imageUrl)
+      let indexOfFavorite = state.favorites.indexOf(imageUrl);
 
       if (indexOfFavorite >= 0) {
-        state.favorites.splice(indexOfFavorite, 1)
+        StorageApi.removeFavorite(imageUrl);
+        state.favorites.splice(indexOfFavorite, 1);
       } else {
-        state.favorites.push(imageUrl)
+        StorageApi.saveFavorite(imageUrl);
+        state.favorites.push(imageUrl);
       }
     },
     /**
